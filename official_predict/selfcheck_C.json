@@ -1,0 +1,18 @@
+{
+ "ok": true,
+ "task": "regression",
+ "samples": 23049,
+ "checkpoint_profile": "C",
+ "classes": [],
+ "schema_errors": 0,
+ "official_equivalence": {
+  "compared": true,
+  "max_abs_diff": 0.0,
+  "equivalent": true
+ },
+ "local_metric": {
+  "rmse": 52.1223575503567,
+  "mae": 38.176556147961215,
+  "n": 23049
+ }
+}

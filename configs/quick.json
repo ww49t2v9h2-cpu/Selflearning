@@ -1,0 +1,15 @@
+{
+  "benchmark": {
+    "scenario": "S7_full_mix"
+  },
+  "budget": {
+    "labels_total": 120,
+    "compute_total": 120.0,
+    "tokens_total": 60000,
+    "updates_total": 20
+  },
+  "run": {
+    "name": "quick",
+    "n_seeds": 1
+  }
+}

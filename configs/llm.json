@@ -1,0 +1,12 @@
+{
+  "harness": {
+    "driver": "llm",
+    "provider": "mock",
+    "model": "mock-trainer-v1",
+    "max_steps": 8
+  },
+  "tracker": {
+    "backend": "local",
+    "project": "zhixun-engine-llm"
+  }
+}

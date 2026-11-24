@@ -1,0 +1,43 @@
+{
+  "_comment": "官方数据包配置模板（docs/15）。把 official_root 指向官方数据包目录；数据缺失时 adapter 会抛出带指引的错误。与 configs/main.json 的差异覆盖机制相同：本文件可整体作为 --config 使用，也可仅作字段模板。",
+  "seed": 7,
+  "benchmark": {
+    "name": "official_zhixun",
+    "adapter": "official",
+    "official_root": "data/official",
+    "chunk_size": 200,
+    "hidden_ratio": 0.34,
+    "base_train_n": 4000,
+    "base_val_n": 1000,
+    "n_classes": 5,
+    "d_features": 48
+  },
+  "budget": {
+    "labels_total": 260,
+    "compute_total": 260.0,
+    "tokens_total": 160000,
+    "updates_total": 48,
+    "per_phase_updates": 3,
+    "probe_labels": 6
+  },
+  "model": {
+    "hidden": [
+      64,
+      32
+    ],
+    "epochs": 40,
+    "lr": 0.004,
+    "batch": 128,
+    "l2": 0.0001,
+    "seed": 0
+  },
+  "run": {
+    "name": "official",
+    "n_seeds": 3,
+    "save_artifacts": true,
+    "deterministic": true
+  },
+  "data": {
+    "sanitize": true
+  }
+}

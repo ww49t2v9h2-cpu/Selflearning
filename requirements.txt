@@ -1,0 +1,12 @@
+# 运行依赖（系统本体）
+numpy>=1.24
+
+# 可选：实验记录上云（SwanLab 官方 SDK，缺失时自动降级本地模式）
+# swanlab>=0.4
+
+# 可选：生成《实验记录汇编》xlsx
+# openpyxl>=3.1
+
+# 开发工具（不进入系统运行依赖）
+# 图表：pip install matplotlib（需独立 venv，见 docs/12）
+# 文档：python-docx、python-pptx（bundled Python 已自带）

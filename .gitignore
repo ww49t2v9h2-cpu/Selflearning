@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+experiments/
+results/
+deliverables/
+*.tar
+*.zip
+!data/external/ai4i2020.zip

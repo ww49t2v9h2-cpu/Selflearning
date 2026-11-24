@@ -1,0 +1,34 @@
+{
+  "benchmark": {
+    "scenario": "S7_full_mix",
+    "noise_scale": 3.4,
+    "rot_alpha": 0.45,
+    "offset_scale": 0.15
+  },
+  "budget": {
+    "labels_total": 260,
+    "compute_total": 260.0,
+    "tokens_total": 160000,
+    "updates_total": 48,
+    "per_phase_updates": 3,
+    "probe_labels": 6
+  },
+  "harness": {
+    "driver": "deterministic",
+    "provider": "mock"
+  },
+  "tracker": {
+    "backend": "both",
+    "swanlab_mode": "offline",
+    "project": "zhixun-engine"
+  },
+  "run": {
+    "name": "main",
+    "n_seeds": 3
+  },
+  "data": {
+    "sanitize": false,
+    "clip_quantile": 0.9995,
+    "fill": "median"
+  }
+}

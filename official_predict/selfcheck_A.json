@@ -1,0 +1,25 @@
+{
+ "ok": true,
+ "task": "classification",
+ "samples": 1244,
+ "checkpoint_profile": "A",
+ "classes": [
+  "Ethanol",
+  "Ethylene",
+  "Ammonia",
+  "Acetaldehyde",
+  "Acetone",
+  "Toluene"
+ ],
+ "schema_errors": 0,
+ "official_equivalence": {
+  "compared": true,
+  "max_abs_diff": 0.0,
+  "equivalent": true
+ },
+ "local_metric": {
+  "macro_f1": 0.7258429888617122,
+  "accuracy": 0.8842443729903537,
+  "n": 1244
+ }
+}
