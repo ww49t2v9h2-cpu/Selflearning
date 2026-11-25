@@ -8,8 +8,8 @@
 - 镜像：`zhixun-engine:1.0-linux-amd64-slim`
 - 架构：`linux/amd64`；单镜像
 - tar：`02_Harness系统镜像.tar`
-  - 大小：**42,421,760 bytes（42.42 MB < 50MB）**
-  - SHA256：`12a5cffc5c68a5bdb7aaaff2a1f6bd134df534a56b79ea63e904916c6bfd7ca9`
+  - 大小：**42,422,784 bytes（42.42 MB < 50MB）**
+  - SHA256：`e71a9769ccbebc1f3e3d36f1fcdffeaf19f92f48dd7553bb553bb70ff7eefe21`
 - 平台入口（**已内置 SDK**）：
   - `/app/harness.py`（模板来自 `contest_harness` 1.0.4）
   - `/app/contest_submission.py`（选手模块：`train(rnd)` / `predict(sample, model_dir)`）
