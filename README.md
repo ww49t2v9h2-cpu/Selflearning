@@ -81,3 +81,13 @@ skills/          Harness 技能文档（LLM 驱动时注入）
 - 运行期不访问网络、不执行任意代码、不写入白名单之外的路径；
 - `STOP` 文件出现即中止一切更新（保留预测与审计）；
 - 审计日志为 sha256 哈希链，`python -m src.cli audit-verify` 可校验完整性。
+
+## 许可与引用
+
+本项目源码采用**限制性使用许可**（[`LICENSE`](LICENSE)）：仅授权用于本届大赛评审、复核与答辩，
+以及个人/学术机构的非商业学习研究；未经书面许可**禁止商用与再分发**（含修改版、二进制/镜像形式）。
+第三方组件与公开数据（Python、NumPy、Alpine 基础镜像、UCI AI4I 2020 等）遵循各自许可，
+详见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) 与 [`data/external/README.md`](data/external/README.md)。
+
+引用本仓库或其中结果时，请注明：智训引擎团队，《智训引擎 · 工业模型自进化系统》，
+第二届北京市大学生“人工智能+”创新大赛参赛作品，2026。

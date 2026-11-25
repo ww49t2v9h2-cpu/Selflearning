@@ -1,0 +1,56 @@
+智训引擎（Zhixun Engine）源码使用许可
+Copyright (c) 2026 智训引擎团队 (Zhixun Engine Team). All rights reserved.
+
+本仓库中的原创源代码、配置、脚本、测试与文档（以下称“本软件”）采用限制性使用许可，
+仅授权用于以下目的：
+
+1. 第二届北京市大学生“人工智能+”创新大赛（赛题「智训引擎——工业制造场景下的模型
+   训练与超参数优化」）的评审、复核、答辩与赛事相关展示；
+2. 个人或学术机构的非商业学习、研究与复现。
+
+在满足上述目的、且完整保留本许可文本与版权声明的前提下，允许复制、阅读、运行、修改
+本软件。
+
+未经版权人书面许可，禁止：
+- 将本软件或其衍生作品用于任何商业目的（包括产品、服务及其他商业项目）；
+- 向第三方再分发本软件，或再分发其修改版本、二进制/容器镜像形式；
+- 移除或修改版权声明、本许可文本以及第三方许可说明。
+
+第三方组件与数据不适用本许可，分别遵循其自身许可：
+- Python（PSF License）、NumPy（BSD 3-Clause License）、Alpine Linux 基础镜像
+  （MIT/GPL 组合）、Docker/Buildx（仅构建工具）；
+- UCI AI4I 2020 Predictive Maintenance Dataset（CC BY 4.0，出处与引用格式见
+  data/external/README.md）。
+详见 THIRD_PARTY_NOTICES.md。
+
+免责声明：本软件按“现状”提供，不附带任何明示或暗示的担保，包括但不限于适销性、
+特定用途适用性及不侵权担保。在任何情况下，版权人均不对因使用本软件而产生的任何
+索赔、损害或其他责任负责。
+
+如需超出上述范围的授权，请通过 GitHub 仓库所有者联系版权人。
+
+--------------------------------------------------------------------
+
+English summary
+
+Copyright (c) 2026 Zhixun Engine Team. All rights reserved.
+
+The original source code, configurations, scripts, tests and documentation in
+this repository (the "Software") are licensed solely for (1) the review,
+judging and defense of this entry in the 2nd Beijing College Students "AI+"
+Innovation Competition, and (2) personal or academic non-commercial study and
+reproduction, provided that this license text and the copyright notice are
+retained in full.
+
+Commercial use, and redistribution of the Software or of derivative works
+(including modified versions and binary/container-image forms), are prohibited
+without prior written permission from the copyright holder.
+
+Third-party components and datasets remain under their own licenses (see
+THIRD_PARTY_NOTICES.md and data/external/README.md).
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OF THE SOFTWARE.
