@@ -49,11 +49,12 @@ $PY -m unittest discover -s tests -v
 | 7 | 实验结果、成本-增益分析、复现 | [`docs/10`](docs/10_实验结果与分析.md) · [`docs/11`](docs/11_成本与增益分析.md) · [`docs/13`](docs/13_复现与交接.md) |
 | 8 | 运行手册、答辩问答 | [`docs/12`](docs/12_系统运行说明.md) · [`docs/14`](docs/14_答辩要点与问答.md) |
 | 9 | 近两年相关文献（2024-11～2026-11，Google/OpenAI/Anthropic/DeepSeek/华为等）与新颖性定位 | [`docs/16`](docs/16_相关文献综述_2024-2026.md) |
+| 10 | 平台提交与镜像说明（官方 contest_harness SDK 入口、镜像构建、7 项材料索引） | [`docs/17`](docs/17_platform_submission.md) |
 
 ## 目录
 
 ```
-docs/            论证与规范（00 总览 / 01 赛题 / 02 路线 / 03 契约 / 04-08 方法 / 09-11 实验 / 12-15 运行交付）
+docs/            论证与规范（00 总览 / 01 赛题 / 02 路线 / 03 契约 / 04-08 方法 / 09-11 实验 / 12-15 运行交付 / 17 平台提交）
 src/core/        冻结数据结构、配置、numpy MLP、指标、隐藏评测器、闭环编排
 src/data/        合成漂移基准、公开工业数据、官方数据适配器、标注 oracle
 src/engine/      监测、诊断、playbook 库、规划器、门禁、模型仓库、安全审计、看门狗
@@ -66,6 +67,7 @@ results/         聚合结果、表格、图
 deliverables/    方案 PDF、运行说明、实验记录汇编、答辩 PPT、系统镜像
 tests/           单元/集成测试（含"不低于静态基线"验收断言）
 skills/          Harness 技能文档（LLM 驱动时注入）
+harness_image/   平台官方 contest_harness SDK 源码、/app/harness.py 固定入口与选手模块（镜像用）
 ```
 
 ## 设计原则

@@ -28,11 +28,20 @@ COPY scripts ./scripts
 COPY skills ./skills
 COPY tests ./tests
 COPY README.md ./
+
+# 平台官方 contest_harness SDK + 固定入口（/app/harness.py）
+COPY harness_image/trio_sdk /opt/contest-harness
+RUN pip install --no-cache-dir /opt/contest-harness
+COPY harness_image/harness.py /app/harness.py
+COPY harness_image/contest_submission.py /app/contest_submission.py
+
 COPY data/external/ai4i2020.zip ./data/external/ai4i2020.zip
 RUN chmod -R a+rX /app \
  && find /app -type d -name __pycache__ -prune -exec rm -rf {} + || true
-RUN mkdir -p /app/experiments /app/results && chown -R app:app /app/experiments /app/results
+RUN mkdir -p /app/experiments /app/results /workspace \
+ && chown -R app:app /app/experiments /app/results /workspace
 
+ENV CONTEST_SUBMISSION=contest_submission CONTEST_WORK=/workspace
 USER app
-ENTRYPOINT ["python", "-m", "src.cli"]
-CMD ["info"]
+ENTRYPOINT ["python3", "/app/harness.py"]
+CMD ["describe"]
