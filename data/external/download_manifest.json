@@ -1,0 +1,15 @@
+{
+  "csv_bytes": 522048,
+  "csv_file": "ai4i2020.csv",
+  "csv_sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "dataset": "AI4I 2020 Predictive Maintenance Dataset (UCI ID 601)",
+  "dataset_page": "https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset",
+  "downloaded_at": "2026-11-16T11:21:04+0800",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "note": "数据为静态公开文件，已纳入仓库；系统运行期不联网。若直链失效，请手动从 dataset_page 下载同名 zip/csv 放入本目录。",
+  "source_kind": "zip",
+  "source_url": "https://archive.ics.uci.edu/static/public/601/ai4i+2020+predictive+maintenance+dataset.zip",
+  "zip_file": "ai4i2020.zip",
+  "zip_sha256": "f601f14294bcf190f9d720676b7f0aea46a26cde9ab8ebc7b4f8174d9d26b252"
+}
