@@ -1,0 +1,38 @@
+# 精简版 Harness 系统镜像（linux/amd64，Alpine，目标 docker save tar < 50MB）
+FROM --platform=linux/amd64 python:3.12-alpine
+
+LABEL org.opencontainers.image.title="zhixun-engine-harness-slim" \
+      org.opencontainers.image.description="智训引擎：工业模型自进化系统（精简离线镜像）" \
+      org.opencontainers.image.version="1.0" \
+      org.opencontainers.image.architecture="amd64" \
+      org.opencontainers.image.os="linux"
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=0 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app
+
+WORKDIR /app
+
+RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app
+
+# numpy 的 musllinux wheel 需要 libstdc++/libgcc 运行库
+RUN apk add --no-cache libstdc++ libgcc
+COPY requirements.txt ./
+RUN pip install --no-cache-dir 'numpy==2.3.5'
+
+COPY src ./src
+COPY configs ./configs
+COPY scripts ./scripts
+COPY skills ./skills
+COPY tests ./tests
+COPY README.md ./
+COPY data/external/ai4i2020.zip ./data/external/ai4i2020.zip
+RUN chmod -R a+rX /app \
+ && find /app -type d -name __pycache__ -prune -exec rm -rf {} + || true
+RUN mkdir -p /app/experiments /app/results && chown -R app:app /app/experiments /app/results
+
+USER app
+ENTRYPOINT ["python", "-m", "src.cli"]
+CMD ["info"]
