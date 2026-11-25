@@ -10,7 +10,7 @@
 4. `sweep`：对单个 (场景, phase, playbook) 扫描超参，用于调优。
 
 运行（在仓库根目录）：
-    PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+    PY=python3
     $PY -m src.engine.eval_bench playbooks
     $PY -m src.engine.eval_bench diagnosis
     $PY -m src.engine.eval_bench monitor --scenario S7_full_mix

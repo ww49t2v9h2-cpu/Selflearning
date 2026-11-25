@@ -1,7 +1,7 @@
 """命令行入口（封闭评测时等价于"一条命令无人干预完成闭环"）。
 
 用法：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY -m src.cli run      --config configs/main.json --group main --seed 0
   $PY -m src.cli suite    --config configs/main.json --groups main,scenarios
   $PY -m src.cli audit-verify --path experiments/audit/<run>.jsonl

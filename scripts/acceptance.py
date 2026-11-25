@@ -15,7 +15,7 @@
   A7 可复现（可选 --repro：同配置重跑，逐窗口曲线完全一致）
 
 用法：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY scripts/acceptance.py                     # 默认 S7 + seed 7
   $PY scripts/acceptance.py --repro             # 额外做可复现校验（跑两次）
 """

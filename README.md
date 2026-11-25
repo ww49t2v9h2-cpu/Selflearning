@@ -29,7 +29,7 @@
 ## 快速开始
 
 ```bash
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 $PY scripts/smoke.py          # 数据+模型+适应原语 冒烟（约 3 秒）
 $PY -m unittest discover -s tests -v
 ```

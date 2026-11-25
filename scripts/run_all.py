@@ -7,7 +7,7 @@
   results/SUMMARY.json / results/SUMMARY.md    汇总（均值±方差）+ 验收断言
 
 用法：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY scripts/run_all.py --groups main --seeds 7,17,27
   $PY scripts/run_all.py --groups main,scenarios,ablations,budget,real --seeds 7,17,27
 """

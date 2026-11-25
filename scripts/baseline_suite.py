@@ -22,7 +22,7 @@
 - `config_used.json` 运行配置快照（可复现）。
 
 运行：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY scripts/baseline_suite.py                        # 全量 S1-S7 × 3 seeds
   $PY scripts/baseline_suite.py --scenarios S7_full_mix --seeds 7
   $PY scripts/baseline_suite.py --outdir /tmp/bl       # 自定义输出目录

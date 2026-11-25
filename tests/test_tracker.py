@@ -1,7 +1,7 @@
 """观测层测试：本地 SQLite/JSONL tracker、SwanLab 适配与降级、查询/导出、性能。
 
 运行：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY -m unittest tests.test_tracker -v
 """
 

@@ -1,7 +1,7 @@
 """Harness 测试：12 工具 / 权限与预算 / 确定性驱动 / LLM 驱动 / provider / skills。
 
 运行：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY -m unittest tests.test_harness -v
 """
 

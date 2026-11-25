@@ -6,7 +6,7 @@
 按阶段聚合，输出 results/diagnostics/s2_affine.json，并打印 Markdown 表。
 
 用法：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY scripts/analyze_affine_s2.py
 """
 

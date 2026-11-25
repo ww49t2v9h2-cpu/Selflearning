@@ -8,7 +8,7 @@
 用法示例
 --------
 ```bash
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 
 # 1) 列出所有 run（按时间倒序）
 $PY scripts/query_records.py list

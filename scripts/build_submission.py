@@ -406,7 +406,7 @@ def build_swanlab_export() -> tuple[Path, Path]:
         "## 3. 本地查询命令（可复跑）",
         "",
         "```bash",
-        "PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3",
+        "PY=python3",
         "$PY scripts/query_records.py stats",
         "$PY scripts/query_records.py list --group main --kind deploy",
         "$PY scripts/query_records.py compare <run_id_a> <run_id_b>",

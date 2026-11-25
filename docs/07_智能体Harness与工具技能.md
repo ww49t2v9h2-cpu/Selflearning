@@ -361,7 +361,7 @@ driver=llm, provider=openai_compat
 ## 10. 测试与证据
 
 ```bash
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 $PY -m unittest tests.test_harness -v     # 56 tests OK
 $PY -m unittest tests.test_tracker -v     # 28 tests OK
 $PY -m unittest discover -s tests -v      # 全套 OK
@@ -404,7 +404,7 @@ $PY scripts/smoke.py                      # [OK] 冒烟验证通过
 ## 11. 复现命令
 
 ```bash
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 # 离线确定性驱动（默认）
 $PY -m src.cli run --config configs/default.json
 # LLM 驱动（mock provider，离线）

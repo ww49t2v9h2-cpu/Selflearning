@@ -2,7 +2,7 @@
 registry / safety / audit / watchdog。
 
 运行：
-    PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+    PY=python3
     $PY -m unittest discover -s tests -v
 """
 

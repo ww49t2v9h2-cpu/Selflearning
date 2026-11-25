@@ -9,7 +9,7 @@
 用法
 ----
 ```bash
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 
 # 全量汇编（默认输出 results/record_book/实验记录汇编.md + .xlsx）
 $PY scripts/gen_record_book.py
@@ -221,7 +221,7 @@ def build_markdown(runs: list[dict], stats: dict, title: str,
     add(f"## {section + 1}. 复现与上云\n")
     add("```bash")
     add("# 1) 复现闭环（同一配置 + seed 必须得到同一结果）")
-    add("PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3")
+    add("PY=python3")
     add("$PY -m src.cli run --config configs/default.json")
     add("")
     add("# 2) 生成记录汇编（本文件）")

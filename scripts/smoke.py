@@ -1,7 +1,7 @@
 """冒烟验证：数据基准 + 模型 + 静态基线 + 三种低成本适应原语。
 
 运行：
-  PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+  PY=python3
   $PY scripts/smoke.py                 # 默认 S7
   $PY scripts/smoke.py S2_sensor_gain   # 指定场景
 """

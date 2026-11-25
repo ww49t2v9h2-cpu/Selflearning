@@ -3,7 +3,7 @@
 # 用法：bash scripts/build_all.sh [--quick]
 set -euo pipefail
 cd "$(dirname "$0")/.."
-PY=/Users/mb/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+PY=python3
 FIGPY="${FIGPY:-/tmp/plotenv/bin/python}"
 
 echo "==[1/13] 单元测试 =="
