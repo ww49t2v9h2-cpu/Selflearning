@@ -10,6 +10,8 @@ LABEL org.opencontainers.image.title="zhixun-engine-harness-slim" \
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONHASHSEED=0 \
+    OPENBLAS_NUM_THREADS=1 \
+    OMP_NUM_THREADS=1 \
     PIP_NO_CACHE_DIR=1 \
     PYTHONPATH=/app
 
@@ -34,6 +36,7 @@ COPY harness_image/trio_sdk /opt/contest-harness
 RUN pip install --no-cache-dir /opt/contest-harness
 COPY harness_image/harness.py /app/harness.py
 COPY harness_image/contest_submission.py /app/contest_submission.py
+COPY harness_image/entrypoint.sh /app/entrypoint.sh
 
 COPY data/external/ai4i2020.zip ./data/external/ai4i2020.zip
 RUN chmod -R a+rX /app \
@@ -43,5 +46,5 @@ RUN mkdir -p /app/experiments /app/results /workspace \
 
 ENV CONTEST_SUBMISSION=contest_submission CONTEST_WORK=/workspace
 USER app
-ENTRYPOINT ["python3", "/app/harness.py"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["describe"]

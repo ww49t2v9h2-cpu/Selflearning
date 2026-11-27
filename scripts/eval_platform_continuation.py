@@ -69,8 +69,11 @@ def c_reference_test(parent, candidate):
         scores = {}
         for name, model in (("parent", parent), ("candidate", candidate)):
             err = predictions(model) - target
-            scores[name] = {"rmse": float(np.sqrt(np.mean(err ** 2))),
-                            "mae": float(np.abs(err).mean())}
+            scores[name] = {
+                "rmse": float(np.sqrt(np.mean(err ** 2))),
+                "mae": float(np.abs(err).mean()),
+                "nasa": float(np.expm1(np.maximum(-err / 13, err / 10)).sum()),
+            }
         output[subset] = scores
     return output
 
@@ -83,7 +86,7 @@ def main():
         checkpoint = initial
         rounds = []
         with TemporaryDirectory() as tmp, patch.dict(os.environ, {"CONTEST_WORK": tmp}):
-            for index in (1, 2):
+            for index in (1, 2, 3):
                 rnd = LocalRound(key, index, checkpoint, folder / "public/train.jsonl",
                                  folder / "public/validation.jsonl")
                 submission.train(rnd)
@@ -95,8 +98,10 @@ def main():
                         actual = submission.predict(SimpleNamespace(inputs=row["inputs"]), tmp)
                         assert actual == model.predict_one(row["inputs"])
                     checkpoint = rnd.candidate
-                    if key == "C" and index == 1:
-                        report["C_reference_test"] = c_reference_test(submission.load_model(initial), model)
+                    if key == "C":
+                        report.setdefault("C_reference_test", {})[str(index)] = c_reference_test(
+                            submission.load_model(initial), model
+                        )
                 print(key, index, "submitted", rnd.record["submitted"],
                       rnd.record.get("parent_metrics", rnd.record.get("public_parent")),
                       rnd.record.get("selected_candidate", rnd.record.get("public_candidate")), flush=True)
@@ -104,7 +109,7 @@ def main():
                 assert rounds[0]["tested_candidates"] > 0
                 assert rounds[0]["submitted"], rounds[0]
             report[key] = rounds
-    path = ROOT / "results/official/platform_continuation"
+    path = ROOT / "results/official/platform_trial2"
     path.mkdir(parents=True, exist_ok=True)
     (path / "summary.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

@@ -1,0 +1,758 @@
+{
+  "A": [
+    {
+      "task": "classification",
+      "rows": 445,
+      "parent_rows": 358,
+      "val_rows": 87,
+      "holdout_parent": 0.9467651873658548,
+      "holdout_candidate": 0.9467651873658548,
+      "holdout_improved": false,
+      "public_improved": false,
+      "public_parent": 0.7140297220788709,
+      "public_candidate": 0.7140297220788709,
+      "adaptation": "parent",
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "fine_tuned": false,
+      "unsupervised_tta": false,
+      "unsupervised_step": null,
+      "offline_evidence": "official CPU-A batches 3-10: static 0.3199 -> TTA 0.5528 (+23.29pt)",
+      "submitted": false,
+      "selected": "parent"
+    },
+    {
+      "task": "classification",
+      "rows": 445,
+      "parent_rows": 358,
+      "val_rows": 87,
+      "holdout_parent": 0.9467651873658548,
+      "holdout_candidate": 0.9467651873658548,
+      "holdout_improved": false,
+      "public_improved": false,
+      "public_parent": 0.7140297220788709,
+      "public_candidate": 0.7140297220788709,
+      "adaptation": "val",
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "fine_tuned": false,
+      "unsupervised_tta": true,
+      "unsupervised_step": 0.5,
+      "offline_evidence": "official CPU-A batches 3-10: static 0.3199 -> TTA 0.5528 (+23.29pt)",
+      "submitted": true
+    },
+    {
+      "task": "classification",
+      "rows": 445,
+      "parent_rows": 358,
+      "val_rows": 87,
+      "holdout_parent": 0.9086871424269799,
+      "holdout_candidate": 0.9467651873658548,
+      "holdout_improved": true,
+      "public_improved": true,
+      "public_parent": 0.592593148605733,
+      "public_candidate": 0.7138306474602256,
+      "adaptation": "fit",
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "fine_tuned": false,
+      "unsupervised_tta": false,
+      "unsupervised_step": null,
+      "offline_evidence": "official CPU-A batches 3-10: static 0.3199 -> TTA 0.5528 (+23.29pt)",
+      "submitted": true
+    }
+  ],
+  "B": [
+    {
+      "task": "regression",
+      "train_seen": 7032,
+      "train_used": 7032,
+      "validation_seen": 1679,
+      "validation_used": 1679,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 36,
+      "passed_candidates": 6,
+      "validation_groups": {
+        "Bearing1_4": 122,
+        "Bearing2_4": 42,
+        "Bearing3_4": 1515
+      },
+      "parent_metrics": {
+        "rmse": 681.1598326043113,
+        "mae": 563.1058414514887,
+        "groups": {
+          "Bearing1_4": 241.9807988305028,
+          "Bearing2_4": 390.81504161336534,
+          "Bearing3_4": 710.8130722393482
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 64,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 667.3169116445337,
+          "mae": 553.0294629309469,
+          "groups": {
+            "Bearing1_4": 227.101121015436,
+            "Bearing2_4": 275.01494816173926,
+            "Bearing3_4": 698.0453040426457
+          }
+        },
+        "rmse_gain": 0.0203225737883741,
+        "worst_group_gain": 0.01796220229388701,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.11804824004354608,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 64,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 0.5
+        },
+        "validation": {
+          "rmse": 673.6555095850014,
+          "mae": 557.5564383599941,
+          "groups": {
+            "Bearing1_4": 232.27216213530613,
+            "Bearing2_4": 329.960150140809,
+            "Bearing3_4": 703.9704847891131
+          }
+        },
+        "rmse_gain": 0.011016978189418936,
+        "worst_group_gain": 0.009626423201078982,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.04677373252393636,
+        "passed": true
+      }
+    },
+    {
+      "task": "regression",
+      "train_seen": 7032,
+      "train_used": 7032,
+      "validation_seen": 1679,
+      "validation_used": 1679,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 18,
+      "passed_candidates": 2,
+      "validation_groups": {
+        "Bearing1_4": 122,
+        "Bearing2_4": 42,
+        "Bearing3_4": 1515
+      },
+      "parent_metrics": {
+        "rmse": 673.6555095850014,
+        "mae": 557.5564383599941,
+        "groups": {
+          "Bearing1_4": 232.27216213530613,
+          "Bearing2_4": 329.96015014080905,
+          "Bearing3_4": 703.9704847891131
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 664.2288127764658,
+          "mae": 551.2489387882378,
+          "groups": {
+            "Bearing1_4": 230.5924294446418,
+            "Bearing2_4": 273.8201380519008,
+            "Bearing3_4": 694.693946850407
+          }
+        },
+        "rmse_gain": 0.01399334923326434,
+        "worst_group_gain": 0.007231743465176188,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.07249788490593101,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 0.5
+        },
+        "validation": {
+          "rmse": 668.7634845477231,
+          "mae": 554.3320664271488,
+          "groups": {
+            "Bearing1_4": 230.76036923232084,
+            "Bearing2_4": 301.0619745995206,
+            "Bearing3_4": 699.1840264948236
+          }
+        },
+        "rmse_gain": 0.007261909043528636,
+        "worst_group_gain": 0.0065087132658825375,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.03300184756427248,
+        "passed": true
+      }
+    },
+    {
+      "task": "regression",
+      "train_seen": 7032,
+      "train_used": 7032,
+      "validation_seen": 1679,
+      "validation_used": 1679,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 18,
+      "passed_candidates": 1,
+      "validation_groups": {
+        "Bearing1_4": 122,
+        "Bearing2_4": 42,
+        "Bearing3_4": 1515
+      },
+      "parent_metrics": {
+        "rmse": 668.7634845477231,
+        "mae": 554.3320664271488,
+        "groups": {
+          "Bearing1_4": 230.76036923232084,
+          "Bearing2_4": 301.0619745995206,
+          "Bearing3_4": 699.1840264948236
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.01,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 668.1525221156849,
+          "mae": 553.561293732039,
+          "groups": {
+            "Bearing1_4": 227.18078709479195,
+            "Bearing2_4": 283.36628090000306,
+            "Bearing3_4": 698.8360232222067
+          }
+        },
+        "rmse_gain": 0.0009135702623648267,
+        "worst_group_gain": 0.0004977277217866893,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.03386755493837296,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 1.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 0.25
+        },
+        "validation": {
+          "rmse": 666.9895743063,
+          "mae": 553.2009724362641,
+          "groups": {
+            "Bearing1_4": 231.3366681915065,
+            "Bearing2_4": 294.3355992114134,
+            "Bearing3_4": 697.3678203190981
+          }
+        },
+        "rmse_gain": 0.002652522576980676,
+        "worst_group_gain": -0.002497391389617132,
+        "nasa_log_change": null,
+        "worst_nasa_group_log_change": null,
+        "worst_period_drop": 0.01092101884195036,
+        "passed": true
+      }
+    }
+  ],
+  "C_reference_test": {
+    "1": {
+      "FD001": {
+        "parent": {
+          "rmse": 41.8118067233034,
+          "mae": 34.036904338616004,
+          "nasa": 101427.39793174765
+        },
+        "candidate": {
+          "rmse": 39.08203308149696,
+          "mae": 31.059073530743618,
+          "nasa": 75317.86203084077
+        }
+      },
+      "FD002": {
+        "parent": {
+          "rmse": 35.31165236854601,
+          "mae": 27.584178567124628,
+          "nasa": 67161.10701350763
+        },
+        "candidate": {
+          "rmse": 35.2718562534319,
+          "mae": 27.645031745983367,
+          "nasa": 68422.50507260468
+        }
+      },
+      "FD003": {
+        "parent": {
+          "rmse": 60.59547594621817,
+          "mae": 50.52541833431161,
+          "nasa": 12529389.62866747
+        },
+        "candidate": {
+          "rmse": 57.6485938767956,
+          "mae": 47.39787480800288,
+          "nasa": 9575720.537829036
+        }
+      },
+      "FD004": {
+        "parent": {
+          "rmse": 46.2235692144994,
+          "mae": 36.087882485623666,
+          "nasa": 933660.434610127
+        },
+        "candidate": {
+          "rmse": 47.18711049497246,
+          "mae": 36.764303369249774,
+          "nasa": 1260315.1283038466
+        }
+      }
+    },
+    "2": {
+      "FD001": {
+        "parent": {
+          "rmse": 41.8118067233034,
+          "mae": 34.036904338616004,
+          "nasa": 101427.39793174765
+        },
+        "candidate": {
+          "rmse": 35.859332157117464,
+          "mae": 27.74288990098848,
+          "nasa": 46158.082626414405
+        }
+      },
+      "FD002": {
+        "parent": {
+          "rmse": 35.31165236854601,
+          "mae": 27.584178567124628,
+          "nasa": 67161.10701350763
+        },
+        "candidate": {
+          "rmse": 34.242254594686294,
+          "mae": 26.653973587816388,
+          "nasa": 54436.00789616946
+        }
+      },
+      "FD003": {
+        "parent": {
+          "rmse": 60.59547594621817,
+          "mae": 50.52541833431161,
+          "nasa": 12529389.62866747
+        },
+        "candidate": {
+          "rmse": 53.929932308524904,
+          "mae": 43.68962058927511,
+          "nasa": 6991786.466323888
+        }
+      },
+      "FD004": {
+        "parent": {
+          "rmse": 46.2235692144994,
+          "mae": 36.087882485623666,
+          "nasa": 933660.434610127
+        },
+        "candidate": {
+          "rmse": 46.32368534511177,
+          "mae": 35.89021774619593,
+          "nasa": 1142519.577924883
+        }
+      }
+    },
+    "3": {
+      "FD001": {
+        "parent": {
+          "rmse": 41.8118067233034,
+          "mae": 34.036904338616004,
+          "nasa": 101427.39793174765
+        },
+        "candidate": {
+          "rmse": 35.04220092859602,
+          "mae": 26.942712708501094,
+          "nasa": 40595.00142702261
+        }
+      },
+      "FD002": {
+        "parent": {
+          "rmse": 35.31165236854601,
+          "mae": 27.584178567124628,
+          "nasa": 67161.10701350763
+        },
+        "candidate": {
+          "rmse": 33.96681421756224,
+          "mae": 26.368123782332066,
+          "nasa": 52018.90102427923
+        }
+      },
+      "FD003": {
+        "parent": {
+          "rmse": 60.59547594621817,
+          "mae": 50.52541833431161,
+          "nasa": 12529389.62866747
+        },
+        "candidate": {
+          "rmse": 52.971205131400225,
+          "mae": 42.66468889843195,
+          "nasa": 6600514.543846573
+        }
+      },
+      "FD004": {
+        "parent": {
+          "rmse": 46.2235692144994,
+          "mae": 36.087882485623666,
+          "nasa": 933660.434610127
+        },
+        "candidate": {
+          "rmse": 46.09380928806224,
+          "mae": 35.6516520084876,
+          "nasa": 1131420.9303146577
+        }
+      }
+    }
+  },
+  "C": [
+    {
+      "task": "regression",
+      "train_seen": 113089,
+      "train_used": 20000,
+      "validation_seen": 23049,
+      "validation_used": 15000,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 54,
+      "passed_candidates": 19,
+      "validation_groups": {
+        "FD001": 2037,
+        "FD002": 4891,
+        "FD003": 2333,
+        "FD004": 5739
+      },
+      "parent_metrics": {
+        "rmse": 52.73486157116976,
+        "mae": 38.827336031971235,
+        "groups": {
+          "FD001": 42.89070257379409,
+          "FD002": 40.870794975158674,
+          "FD003": 55.32850963116412,
+          "FD004": 62.82993188725456
+        },
+        "log1p_nasa": 21.97811778700076,
+        "log1p_nasa_groups": {
+          "FD001": 13.747446813502629,
+          "FD002": 15.316843558684841,
+          "FD003": 18.77277595854944,
+          "FD004": 21.93511538435311
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 160,
+          "unit_weight": 0.0,
+          "tail_weight": 0.25,
+          "ridge": 0.0001,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 50.71856172755036,
+          "mae": 37.15614637126716,
+          "groups": {
+            "FD001": 39.927772269025795,
+            "FD002": 40.29438095960406,
+            "FD003": 50.862103652508345,
+            "FD004": 61.00964877689014
+          },
+          "log1p_nasa": 21.16325273037093,
+          "log1p_nasa_groups": {
+            "FD001": 13.632478943958386,
+            "FD002": 15.59250289931298,
+            "FD003": 19.45667237574727,
+            "FD004": 20.957667508345146
+          }
+        },
+        "rmse_gain": 0.038234666471974155,
+        "worst_group_gain": 0.014103322822689335,
+        "nasa_log_change": -0.8148650566298272,
+        "worst_nasa_group_log_change": 0.6838964171978326,
+        "worst_period_drop": 0.06062030823876951,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 160,
+          "unit_weight": 0.0,
+          "tail_weight": 0.0,
+          "ridge": 0.001,
+          "step": 0.5
+        },
+        "validation": {
+          "rmse": 51.98738553829793,
+          "mae": 38.190841811022395,
+          "groups": {
+            "FD001": 41.77078752042158,
+            "FD002": 40.49585735875464,
+            "FD003": 53.76605328452203,
+            "FD004": 62.22501831523804
+          },
+          "log1p_nasa": 21.717710758405573,
+          "log1p_nasa_groups": {
+            "FD001": 13.679681367615633,
+            "FD002": 15.266340863345777,
+            "FD003": 18.64429721225752,
+            "FD004": 21.668347950623563
+          }
+        },
+        "rmse_gain": 0.014174229543829409,
+        "worst_group_gain": 0.009173729471910752,
+        "nasa_log_change": -0.2604070285951856,
+        "worst_nasa_group_log_change": -0.050502695339064374,
+        "worst_period_drop": 0.030607054907227423,
+        "passed": true
+      }
+    },
+    {
+      "task": "regression",
+      "train_seen": 113089,
+      "train_used": 20000,
+      "validation_seen": 23049,
+      "validation_used": 15000,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 27,
+      "passed_candidates": 5,
+      "validation_groups": {
+        "FD001": 2037,
+        "FD002": 4891,
+        "FD003": 2333,
+        "FD004": 5739
+      },
+      "parent_metrics": {
+        "rmse": 51.98738553829793,
+        "mae": 38.190841811022395,
+        "groups": {
+          "FD001": 41.77078752042158,
+          "FD002": 40.49585735875464,
+          "FD003": 53.76605328452204,
+          "FD004": 62.22501831523804
+        },
+        "log1p_nasa": 21.717710758405573,
+        "log1p_nasa_groups": {
+          "FD001": 13.679681367615633,
+          "FD002": 15.266340863345777,
+          "FD003": 18.64429721225752,
+          "FD004": 21.668347950623563
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 0.0,
+          "tail_weight": 0.25,
+          "ridge": 0.0001,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 50.74324266769055,
+          "mae": 37.105445241240005,
+          "groups": {
+            "FD001": 40.03972607256702,
+            "FD002": 40.088795307812646,
+            "FD003": 51.17477328974625,
+            "FD004": 61.04636821492147
+          },
+          "log1p_nasa": 21.22980511563666,
+          "log1p_nasa_groups": {
+            "FD001": 13.588922726447707,
+            "FD002": 15.507843730373024,
+            "FD003": 19.546665507638604,
+            "FD004": 21.019647580596423
+          }
+        },
+        "rmse_gain": 0.023931629908390817,
+        "worst_group_gain": 0.01005194302557455,
+        "nasa_log_change": -0.487905642768915,
+        "worst_nasa_group_log_change": 0.9023682953810841,
+        "worst_period_drop": 0.03389004557172226,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 0.5,
+          "tail_weight": 0.0,
+          "ridge": 0.0001,
+          "step": 0.5
+        },
+        "validation": {
+          "rmse": 51.39521587041434,
+          "mae": 37.34818282581906,
+          "groups": {
+            "FD001": 40.597542590017554,
+            "FD002": 39.931165494958556,
+            "FD003": 52.043288283926366,
+            "FD004": 62.121257024053826
+          },
+          "log1p_nasa": 21.62684721843896,
+          "log1p_nasa_groups": {
+            "FD001": 13.6469409547004,
+            "FD002": 15.250684430527022,
+            "FD003": 18.33957167047718,
+            "FD004": 21.58665065913062
+          }
+        },
+        "rmse_gain": 0.011390641436418325,
+        "worst_group_gain": 0.0016675172461749765,
+        "nasa_log_change": -0.09086353996661245,
+        "worst_nasa_group_log_change": -0.01565643281875495,
+        "worst_period_drop": 0.038737904119489894,
+        "passed": true
+      }
+    },
+    {
+      "task": "regression",
+      "train_seen": 113089,
+      "train_used": 20000,
+      "validation_seen": 23049,
+      "validation_used": 15000,
+      "excluded_validation_ids": 0,
+      "validation_source": "platform_public",
+      "tested_candidates": 27,
+      "passed_candidates": 1,
+      "validation_groups": {
+        "FD001": 2037,
+        "FD002": 4891,
+        "FD003": 2333,
+        "FD004": 5739
+      },
+      "parent_metrics": {
+        "rmse": 51.39521587041434,
+        "mae": 37.34818282581906,
+        "groups": {
+          "FD001": 40.59754259001756,
+          "FD002": 39.931165494958556,
+          "FD003": 52.04328828392637,
+          "FD004": 62.12125702405382
+        },
+        "log1p_nasa": 21.62684721843896,
+        "log1p_nasa_groups": {
+          "FD001": 13.646940954700398,
+          "FD002": 15.250684430527022,
+          "FD003": 18.339571670477184,
+          "FD004": 21.58665065913062
+        }
+      },
+      "best_attempt": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 0.0,
+          "tail_weight": 0.0,
+          "ridge": 0.0001,
+          "step": 1.0
+        },
+        "validation": {
+          "rmse": 50.83869396110346,
+          "mae": 36.97770069087591,
+          "groups": {
+            "FD001": 39.96215859740297,
+            "FD002": 39.82641539070483,
+            "FD003": 51.426104608733404,
+            "FD004": 61.33181469739845
+          },
+          "log1p_nasa": 21.330898863228736,
+          "log1p_nasa_groups": {
+            "FD001": 13.545171415364806,
+            "FD002": 15.438284006697248,
+            "FD003": 19.08192655063753,
+            "FD004": 21.21584376006203
+          }
+        },
+        "rmse_gain": 0.010828282358304908,
+        "worst_group_gain": 0.0026232668882892884,
+        "nasa_log_change": -0.2959483552102249,
+        "worst_nasa_group_log_change": 0.7423548801603452,
+        "worst_period_drop": 0.02970995090553201,
+        "passed": false
+      },
+      "model_decision": "SUBMIT",
+      "model_reply": "SUBMIT",
+      "submitted": true,
+      "fine_tuned": true,
+      "selected_candidate": {
+        "method": {
+          "basis_added": 0,
+          "unit_weight": 0.5,
+          "tail_weight": 0.0,
+          "ridge": 0.0001,
+          "step": 0.25
+        },
+        "validation": {
+          "rmse": 51.24791432595138,
+          "mae": 37.11675991081825,
+          "groups": {
+            "FD001": 40.321312498466206,
+            "FD002": 39.79446399551728,
+            "FD003": 51.59298973737687,
+            "FD004": 62.0944906601436
+          },
+          "log1p_nasa": 21.601919519542736,
+          "log1p_nasa_groups": {
+            "FD001": 13.65331384916574,
+            "FD002": 15.264814622632532,
+            "FD003": 18.294619282174747,
+            "FD004": 21.562411804295063
+          }
+        },
+        "rmse_gain": 0.00286605556506192,
+        "worst_group_gain": 0.00043087286369392075,
+        "nasa_log_change": -0.02492769889622437,
+        "worst_nasa_group_log_change": 0.01413019210550992,
+        "worst_period_drop": 0.010769883915438337,
+        "passed": true
+      }
+    }
+  ]
+}

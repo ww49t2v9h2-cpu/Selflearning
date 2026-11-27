@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import os
 import random
+from math import isfinite, log1p
 from functools import lru_cache
 from pathlib import Path
 
@@ -75,6 +76,7 @@ class OfficialModel:
         self.task = meta.get("task", "classification")
         self.classes = list(meta.get("classes") or [])
         self.paths = list(meta.get("paths") or [])
+        self.feature_steps = [json.loads(path) if isinstance(path, str) else path for path in self.paths]
         self.w1, self.b1, self.w2, self.b2 = w1, b1, w2, b2
         self.mean, self.scale = mean, scale
 
@@ -85,8 +87,7 @@ class OfficialModel:
             return cls(meta, z["w1"], z["b1"], z["w2"], z["b2"], z["mean"], z["scale"])
 
     def predict_one(self, inputs):
-        flat = flatten_official(inputs)
-        x = np.asarray([float(flat.get(_path_key(p), 0.0)) for p in self.paths], dtype=np.float64)
+        x = self.vector(inputs)
         x = np.clip((x - self.mean) / self.scale, -10.0, 10.0)
         h = np.tanh(x @ self.w1 + self.b1)
         logits = h @ self.w2 + self.b2
@@ -97,6 +98,22 @@ class OfficialModel:
         p = np.exp(logits)
         p = p / p.sum()
         return [{"label": c, "score": float(s)} for c, s in zip(self.classes, p)]
+
+    def vector(self, inputs):
+        values = np.zeros(len(self.feature_steps))
+        for column, steps in enumerate(self.feature_steps):
+            value = inputs
+            for kind, key in steps:
+                if kind == "key" and isinstance(value, dict):
+                    value = value.get(key)
+                elif kind == "index" and isinstance(value, (list, tuple)) and 0 <= key < len(value):
+                    value = value[key]
+                else:
+                    value = None
+                    break
+            if type(value) in (int, float) and isfinite(value):
+                values[column] = value
+        return values
 
 
 def load_model(path):
@@ -197,8 +214,7 @@ def _parent_checkpoint(rnd):
 
 def _model_vector(model, inputs):
     if isinstance(model, OfficialModel):
-        flat = flatten_official(inputs)
-        return np.asarray([float(flat.get(_path_key(p), 0.0)) for p in model.paths], dtype=np.float64)
+        return model.vector(inputs)
     flat = dict(flatten_inputs(inputs))
     return np.asarray([float(flat.get(p, 0.0)) for p in model.feature_paths], dtype=np.float64)
 
@@ -491,15 +507,30 @@ def _regression_groups(rows, dataset_key):
     return np.asarray(stages), np.asarray(units)
 
 
-def _rul_scores(logits, y, target_mean, target_scale, groups):
+def _log_nasa(exponent):
+    """Compute log(1 + NASA sum) without overflowing the exponential."""
+    peak = float(exponent.max())
+    scaled = -np.expm1(-exponent) * np.exp(exponent - peak)
+    return float(peak + np.log(np.exp(-peak) + scaled.sum()))
+
+
+def _rul_scores(logits, y, target_mean, target_scale, groups, nasa=False):
     error = np.maximum(0, logits * target_scale + target_mean) - y
     squares = error ** 2
-    return {
+    scores = {
         "rmse": float(np.sqrt(squares.mean())),
         "mae": float(np.abs(error).mean()),
         "groups": {name: float(np.sqrt(squares[indices].mean()))
                    for name, indices in groups.items()},
     }
+    if nasa:
+        exponent = np.maximum(-error / 13, error / 10)
+        scores["log1p_nasa"] = _log_nasa(exponent)
+        scores["log1p_nasa_groups"] = {
+            name: _log_nasa(exponent[indices])
+            for name, indices in groups.items() if isinstance(name, str)
+        }
+    return scores
 
 
 def _validation_periods(rows, stages, units, dataset_key):
@@ -549,10 +580,18 @@ def _rul_candidates(parent, train_rows, val_rows, dataset_key, diagnostics):
     h = np.tanh(x @ parent.w1 + parent.b1)
     hv = np.tanh(v @ parent.w1 + parent.b1)
     base_val = (hv @ parent.w2 + parent.b2).ravel()
-    base = _rul_scores(base_val, z, tm, ts, scores_by)
+    nasa = dataset_key == "C"
+    base = _rul_scores(base_val, z, tm, ts, scores_by, nasa=nasa)
     diagnostics["parent_metrics"] = {**base, "groups": {name: base["groups"][name] for name in val_groups}}
-    residual = (y - tm) / ts - (h @ parent.w2 + parent.b2).ravel()
+    base_train = (h @ parent.w2 + parent.b2).ravel()
+    residual = (y - tm) / ts - base_train
     _, inverse, counts = np.unique(units, return_inverse=True, return_counts=True)
+    weight_profiles = [(0.5, 0.0), (1.0, 0.0)] if not nasa else [
+        (0.0, 0.0), (0.5, 0.0), (0.0, 0.25),
+    ]
+    if nasa:
+        train_error = np.maximum(0, base_train * ts + tm) - y
+        tail = np.minimum(6, np.maximum(-train_error / 13, train_error / 10))
 
     # Add the nonlinear basis at most once in a lineage. Its output weights
     # start at zero, so each candidate remains a residual update of its parent.
@@ -564,7 +603,10 @@ def _rul_candidates(parent, train_rows, val_rows, dataset_key, diagnostics):
         hidden, val_hidden = h, hv
         if width:
             rng = np.random.default_rng(7)
-            basis = rng.normal(0, 1 / np.sqrt(x.shape[1]), (x.shape[1], width))
+            # Smaller projections keep the bearing basis away from tanh
+            # saturation on large vibration features.
+            basis_scale = 0.2 if dataset_key == "B" else 1.0
+            basis = rng.normal(0, basis_scale / np.sqrt(x.shape[1]), (x.shape[1], width))
             bias = rng.uniform(-1, 1, width)
             w1 = np.column_stack((w1, basis))
             b1 = np.concatenate((b1, bias))
@@ -574,9 +616,10 @@ def _rul_candidates(parent, train_rows, val_rows, dataset_key, diagnostics):
         design = np.column_stack((hidden, np.ones(len(x))))
         val_design = np.column_stack((val_hidden, np.ones(len(v))))
         penalty = np.eye(design.shape[1])
-        strengths = (0.5, 1.0) if dataset_key == "B" else (0.0, 0.5)
-        for strength in strengths:
+        for strength, tail_weight in weight_profiles:
             weights = counts[inverse].astype(np.float64) ** -strength
+            if tail_weight:
+                weights *= np.exp(tail_weight * tail)
             weights /= weights.sum()
             gram = design.T @ (weights[:, None] * design)
             rhs = design.T @ (weights * residual)
@@ -584,7 +627,7 @@ def _rul_candidates(parent, train_rows, val_rows, dataset_key, diagnostics):
                 delta = np.linalg.solve(gram + ridge * penalty, rhs)
                 correction = val_design @ delta
                 for fraction in (0.25, 0.5, 1.0):
-                    scores = _rul_scores(base_val + fraction * correction, z, tm, ts, scores_by)
+                    scores = _rul_scores(base_val + fraction * correction, z, tm, ts, scores_by, nasa=nasa)
                     gain = 1 - scores["rmse"] / max(base["rmse"], 1e-8)
                     group_gains = [1 - scores["groups"][name] / max(base["groups"][name], 1e-8)
                                    for name in val_groups if base["groups"][name] > 1e-8]
@@ -592,19 +635,28 @@ def _rul_candidates(parent, train_rows, val_rows, dataset_key, diagnostics):
                     period_drop = max(
                         ((scores["groups"][tag] - base["groups"][tag]) /
                          max(base["groups"][tag[0]], 1e-8) for tag in periods), default=0.0)
-                    method = {"basis_added": width, "unit_weight": strength,
+                    nasa_change = scores["log1p_nasa"] - base["log1p_nasa"] if nasa else None
+                    nasa_group_change = max(
+                        (scores["log1p_nasa_groups"][name] - value
+                         for name, value in base["log1p_nasa_groups"].items()),
+                        default=0.0,
+                    ) if nasa else None
+                    method = {"basis_added": width, "unit_weight": strength, "tail_weight": tail_weight,
                               "ridge": ridge, "step": fraction}
                     # Require a material RMSE gain while bounding subgroup
                     # regression and keeping aggregate MAE within a small margin.
                     min_gain = 0.01 if diagnostics.get("validation_source") == "training_holdout" else 0.002
                     accepted = (gain >= min_gain and worst >= -0.005
                                 and period_drop <= 0.05
+                                and (not nasa or (nasa_change <= 1e-10 and nasa_group_change <= log1p(0.02)))
                                 and scores["mae"] <= base["mae"] * 1.005
                                 and all(scores["groups"][name] <= 1e-8
                                         for name in val_groups if base["groups"][name] <= 1e-8))
                     scores["groups"] = {name: scores["groups"][name] for name in val_groups}
                     metrics = {"method": method, "validation": scores,
                                "rmse_gain": float(gain), "worst_group_gain": float(worst),
+                               "nasa_log_change": nasa_change,
+                               "worst_nasa_group_log_change": nasa_group_change,
                                "worst_period_drop": float(period_drop),
                                "passed": bool(accepted)}
                     attempts.append(metrics)
@@ -659,9 +711,10 @@ def _train_rul(rnd, parent, work):
     choice = candidates[0] if candidates else None
     if choice:
         metrics, params = choice
+        checks = "RMSE, MAE, period and NASA" if rnd.dataset_key == "C" else "RMSE, MAE and period"
         prompt = (f"{rnd.dataset_key} RUL: validation RMSE gain {metrics['rmse_gain']:.2%}, "
                   f"worst group gain {metrics['worst_group_gain']:.2%}. "
-                  "RMSE, MAE and period checks passed. Recommend SUBMIT. Reply SUBMIT or KEEP.")
+                  f"{checks} checks passed. Recommend SUBMIT. Reply SUBMIT or KEEP.")
     else:
         prompt = (f"{rnd.dataset_key} RUL: {config['tested_candidates']} updates tested; "
                   "none passed the visible-data gate. Reply KEEP.")
@@ -692,7 +745,7 @@ def _train_rul(rnd, parent, work):
     elif choice is not None:
         reason = "续训候选通过数值门槛，模型选择保留父产物。"
     elif config["tested_candidates"]:
-        reason = "已执行有监督续训，验证候选均未达到总体 RMSE、MAE 和最差分组门槛。"
+        reason = "已执行有监督续训，验证候选均未通过误差和分组安全门槛。"
     else:
         reason = "可用训练或验证样本不足，无法运行可验证的续训。"
     rnd.finish(selected_artifact_id=artifact_id, hypothesis=hypothesis, change_summary=summary,
